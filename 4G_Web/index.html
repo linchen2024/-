@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>智能终端管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 顶部导航栏 -->
+        <header class="navbar">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <span>智能终端管理系统</span>
+            </div>
+            <div class="status-bar">
+                <span id="status-dot" class="status-dot disconnected"></span>
+                <span id="status-text">未连接</span>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 连接设置区域 -->
+            <section class="ws-settings" style="display:none;">
+                <div class="input-group">
+                    <label for="ws-url">
+                        <i class="fas fa-server"></i>
+                        服务器地址
+                    </label>
+                    <input type="text" id="ws-url" value="ws://borad4g.micu.quest/" autocomplete="off">
+                </div>
+                <button id="connect-btn" class="primary-btn">
+                    <i class="fas fa-plug"></i>
+                    连接
+                </button>
+            </section>
+
+            <!-- 主要内容区域 -->
+            <section class="main-content-area" id="main-content-area">
+                <!-- 聊天区域 -->
+                <section class="chat-area" id="chat-area" style="display: none;">
+                    <div class="chat-header">
+                        <h3 class="chat-title">
+                            <i class="fas fa-comments"></i>
+                            会话信息
+                        </h3>
+                        <button id="hide-chat-btn" class="close-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="chat-messages" id="chat-messages">
+                        <!-- 消息气泡将插入这里 -->
+                    </div>
+                </section>
+
+                <!-- 日志区域 -->
+                <section class="log-area" id="log-area">
+                    <div class="log-header">
+                        <h3 class="log-title">
+                            <i class="fas fa-list-alt"></i>
+                            设备日志
+                        </h3>
+                        <div class="log-actions">
+                            <button id="show-chat-btn" class="action-btn">
+                                <i class="fas fa-comments"></i>
+                                会话信息
+                            </button>
+                            <button id="show-map-btn" class="action-btn">
+                                <i class="fas fa-map-marker-alt"></i>
+                                当前位置
+                            </button>
+                            <button id="show-history-btn" class="action-btn">
+                                <i class="fas fa-history"></i>
+                                历史位置
+                            </button>
+                        </div>
+                    </div>
+                    <ul id="log-list" class="log-list"></ul>
+                </section>
+            </section>
+
+            <!-- 地图模态框 -->
+            <div id="map-modal" class="map-modal" style="display:none;">
+                <div class="map-modal-card">
+                    <div class="map-modal-header">
+                        <span id="map-modal-title" class="map-modal-title">
+                            <i class="fas fa-map"></i>
+                            位置信息
+                        </span>
+                        <span id="close-map" class="close-map">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </div>
+                    <div class="map-controls">
+                        <button id="map-current-btn" class="map-btn active">
+                            <i class="fas fa-crosshairs"></i>
+                            当前位置
+                        </button>
+                        <button id="map-history-btn" class="map-btn">
+                            <i class="fas fa-clock"></i>
+                            历史位置
+                        </button>
+                    </div>
+                    <div id="map" class="map-container"></div>
+                    <div id="map-info" class="map-info"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部输入栏 -->
+        <footer class="input-bar">
+            <div class="input-container">
+                <input type="text" id="message-input" placeholder="输入要发送的消息，按Enter发送" autocomplete="off">
+                <div class="input-actions">
+                    <button id="voice-btn" class="voice-btn" title="语音输入">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <button id="send-btn" class="primary-btn" disabled>
+                        <i class="fas fa-paper-plane"></i>
+                        发送
+                    </button>
+                </div>
+            </div>
+            <div class="secondary-actions">
+                <button id="clear-btn" class="secondary-btn">
+                    <i class="fas fa-trash"></i>
+                    清空消息
+                </button>
+            </div>
+        </footer>
+
+        <!-- 语音识别状态指示器 -->
+        <div id="voice-indicator" class="voice-indicator" style="display: none;">
+            <div class="voice-pulse"></div>
+            <span>正在录音...</span>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
